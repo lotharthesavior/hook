@@ -1,5 +1,8 @@
 <?php
 
+namespace tests;
+
+use tests\stubs\ActionAndFilter;
 use voku\helper\Hooks;
 
 /**
@@ -167,7 +170,7 @@ class HooksTest extends \PHPUnit\Framework\TestCase
     self::assertSame(false, $hooks->do_action_ref_array('testAction', ['test']));
     self::assertSame('Foo', $hooks->apply_filters_ref_array('testFilter', ['Foo']));
 
-    $mock = $this->getMockBuilder('stdClass')->setMethods(['doSomeAction', 'applySomeFilter'])->getMock();
+    $mock = $this->createMock(ActionAndFilter::class);
     $mock->expects(self::exactly(4))->method('doSomeAction');
     $mock->expects(self::exactly(10))->method('applySomeFilter')->willReturn('foo');
 
@@ -201,7 +204,7 @@ class HooksTest extends \PHPUnit\Framework\TestCase
 
     self::assertSame('testAction', $hooks->do_shortcode('testAction'));
 
-    $testClass = new HooksFooBar();
+    $testClass = new HooksFooBar('foo');
     self::assertSame(true, $hooks->add_shortcode('testAction', [$testClass, 'doSomethingFunction']));
     self::assertTrue($hooks->shortcode_exists('testAction'));
 
@@ -217,7 +220,7 @@ class HooksTest extends \PHPUnit\Framework\TestCase
    * Sets up the fixture, for example, opens a network connection.
    * This method is called before a test is executed.
    */
-  protected function setUp()
+  protected function setUp(): void
   {
     $this->hooks = Hooks::getInstance();
   }
