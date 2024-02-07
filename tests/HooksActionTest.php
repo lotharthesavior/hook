@@ -2,44 +2,43 @@
 
 namespace tests;
 
-use voku\helper\Hooks;
+use Hook\Hooks;
 
 /**
  * Class HooksTest
  */
 class HooksActionTest extends \PHPUnit\Framework\TestCase
 {
-
   /**
    * @var Hooks
    */
-  protected $hooks;
+    protected $hooks;
 
   /**
    * test action
    */
-  public function testAction()
-  {
-    $done = false;
+    public function testAction()
+    {
+        $done = false;
 
-    $this->hooks->add_action(
-        'bar',
-        function () use (&$done) {
-          $done = true;
-        }
-    );
+        $this->hooks->addAction(
+            'bar',
+            function () use (&$done) {
+                $done = true;
+            }
+        );
 
-    $this->hooks->do_action('bar');
+        $this->hooks->doAction('bar');
 
-    self::assertTrue($done);
-  }
+        self::assertTrue($done);
+    }
 
   /**
    * Sets up the fixture, for example, opens a network connection.
    * This method is called before a test is executed.
    */
-  protected function setUp(): void
-  {
-    $this->hooks = Hooks::getInstance();
-  }
+    protected function setUp(): void
+    {
+        $this->hooks = Hooks::getInstance();
+    }
 }

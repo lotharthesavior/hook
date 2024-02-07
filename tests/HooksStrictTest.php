@@ -4,227 +4,228 @@ declare(strict_types=1);
 
 namespace tests;
 
+use Hook\Hooks;
 use tests\stubs\ActionAndFilter;
-use voku\helper\Hooks;
 
 /**
  * Class HooksTest
  */
 class HooksStrictTest extends \PHPUnit\Framework\TestCase
 {
-
   /**
    * @var Hooks
    */
-  protected $hooks;
+    protected $hooks;
 
   /**
    * @var string
    */
-  protected $testString_1 = 'lalllöäü123';
+    protected $testString_1 = 'lalllöäü123';
 
   /**
    * @var string
    */
-  protected $testString_2 = 'lalll_§$§$&&//"?23';
+    protected $testString_2 = 'lalll_§$§$&&//"?23';
 
   /**
    * @param $input
    *
    * @return string
    */
-  public function hookTestString_1($input)
-  {
-    return $input . $this->testString_1;
-  }
+    public function hookTestString1($input)
+    {
+        return $input . $this->testString_1;
+    }
 
   /**
    * @param $input
    *
    * @return string
    */
-  public function hookTestString_2($input)
-  {
-    return $input . $this->testString_2;
-  }
+    public function hookTestString2($input)
+    {
+        return $input . $this->testString_2;
+    }
 
   /**
    * test hooks
    */
-  public function testHooks()
-  {
-    $this->hooks->add_filter('test_strict', [$this, 'hookTestString_1']);
-    $this->hooks->add_filter('test_strict', [$this, 'hookTestString_2']);
+    public function testHooks()
+    {
+        $this->hooks->addFilter('test_strict', [$this, 'hookTestString1']);
+        $this->hooks->addFilter('test_strict', [$this, 'hookTestString2']);
 
-    $lall = $this->hooks->apply_filters('test_strict', '');
+        $lall = $this->hooks->applyFilters('test_strict', '');
 
-    self::assertSame($lall, $this->testString_1 . $this->testString_2);
-  }
+        self::assertSame($lall, $this->testString_1 . $this->testString_2);
+    }
 
   /**
    * test hooks instance
    *
    * WARNING: you have to run "$this->testHooks()" first
    */
-  public function testHooksInstance()
-  {
-    $lall = $this->hooks->apply_filters('test_strict', '');
+    public function testHooksInstance()
+    {
+        $lall = $this->hooks->applyFilters('test_strict', '');
 
-    self::assertSame($this->testString_1 . $this->testString_2, $lall);
-  }
+        self::assertSame($this->testString_1 . $this->testString_2, $lall);
+    }
 
-  public function testHasFunctions()
-  {
-    $hooks = Hooks::getInstance();
+    public function testHasFunctions()
+    {
+        $hooks = Hooks::getInstance();
 
-    self::assertSame(true, $hooks->remove_all_filters('testFilter'));
-    self::assertSame(true, $hooks->remove_all_actions('testAction'));
+        self::assertSame(true, $hooks->removeAllFilters('testFilter'));
+        self::assertSame(true, $hooks->removeAllActions('testAction'));
 
-    self::assertFalse($hooks->has_filter(''));
-    self::assertFalse($hooks->has_filter(' '));
-    self::assertFalse($hooks->has_filter('testFilter'));
-    self::assertFalse($hooks->has_filter('testFilter', 'time'));
-    self::assertFalse($hooks->has_action('testAction', 'time'));
+        self::assertFalse($hooks->hasFilter(''));
+        self::assertFalse($hooks->hasFilter(' '));
+        self::assertFalse($hooks->hasFilter('testFilter'));
+        self::assertFalse($hooks->hasFilter('testFilter', 'time'));
+        self::assertFalse($hooks->hasAction('testAction', 'time'));
 
-    self::assertSame(true, $hooks->add_filter('testFilter', 'time'));
-    self::assertSame(true, $hooks->add_action('testAction', 'time'));
+        self::assertSame(true, $hooks->addFilter('testFilter', 'time'));
+        self::assertSame(true, $hooks->addAction('testAction', 'time'));
 
-    self::assertTrue($hooks->has_filter('testFilter', 'time') !== false);
-    self::assertTrue($hooks->has_action('testAction', 'time') !== false);
+        self::assertTrue($hooks->hasFilter('testFilter', 'time') !== false);
+        self::assertTrue($hooks->hasAction('testAction', 'time') !== false);
 
-    self::assertFalse($hooks->has_filter('testFilter', 'print_r'));
-    self::assertFalse($hooks->has_action('testAction', 'print_r'));
+        self::assertFalse($hooks->hasFilter('testFilter', 'print_r'));
+        self::assertFalse($hooks->hasAction('testAction', 'print_r'));
 
-    self::assertTrue($hooks->has_filter('testFilter'));
-    self::assertTrue($hooks->has_action('testAction'));
+        self::assertTrue($hooks->hasFilter('testFilter'));
+        self::assertTrue($hooks->hasAction('testAction'));
 
-    self::assertFalse($hooks->has_filter('notExistingFilter'));
-    self::assertFalse($hooks->has_action('notExistingAction'));
-  }
+        self::assertFalse($hooks->hasFilter('notExistingFilter'));
+        self::assertFalse($hooks->hasAction('notExistingAction'));
+    }
 
-  public function testRemoveOneFunctions()
-  {
-    $hooks = Hooks::getInstance();
+    public function testRemoveOneFunctions()
+    {
+        $hooks = Hooks::getInstance();
 
-    $hooks->remove_all_filters('testFilter');
-    $hooks->remove_all_actions('testAction');
+        $hooks->removeAllFilters('testFilter');
+        $hooks->removeAllActions('testAction');
 
-    self::assertFalse($hooks->has_filter('testFilter', 'time'));
-    self::assertFalse($hooks->has_action('testAction', 'time'));
+        self::assertFalse($hooks->hasFilter('testFilter', 'time'));
+        self::assertFalse($hooks->hasAction('testAction', 'time'));
 
-    $hooks->add_filter('testFilter', 'time');
-    $hooks->add_action('testAction', 'time');
+        $hooks->addFilter('testFilter', 'time');
+        $hooks->addAction('testAction', 'time');
 
-    self::assertFalse($hooks->remove_filter('testFilter', 'print_r'));
-    self::assertFalse($hooks->remove_action('testAction', 'print_r'));
+        self::assertFalse($hooks->removeFilter('testFilter', 'print_r'));
+        self::assertFalse($hooks->removeAction('testAction', 'print_r'));
 
-    self::assertTrue($hooks->has_filter('testFilter', 'time') !== false);
-    self::assertTrue($hooks->has_action('testAction', 'time') !== false);
+        self::assertTrue($hooks->hasFilter('testFilter', 'time') !== false);
+        self::assertTrue($hooks->hasAction('testAction', 'time') !== false);
 
-    self::assertTrue($hooks->remove_filter('testFilter', 'time'));
-    self::assertTrue($hooks->remove_action('testAction', 'time'));
+        self::assertTrue($hooks->removeFilter('testFilter', 'time'));
+        self::assertTrue($hooks->removeAction('testAction', 'time'));
 
-    self::assertFalse($hooks->has_filter('testFilter', 'time'));
-    self::assertFalse($hooks->has_action('testAction', 'time'));
-  }
+        self::assertFalse($hooks->hasFilter('testFilter', 'time'));
+        self::assertFalse($hooks->hasAction('testAction', 'time'));
+    }
 
-  public function testRemoveAllFunctions()
-  {
-    $hooks = Hooks::getInstance();
+    public function testRemoveAllFunctions()
+    {
+        $hooks = Hooks::getInstance();
 
-    self::assertSame(true, $hooks->remove_all_filters('testFilter'));
-    self::assertSame(true, $hooks->remove_all_actions('testAction'));
+        self::assertSame(true, $hooks->removeAllFilters('testFilter'));
+        self::assertSame(true, $hooks->removeAllActions('testAction'));
 
-    self::assertSame(true, $hooks->add_filter('testFilter', 'time', 10));
-    self::assertSame(true, $hooks->add_filter('testFilter', 'print_r', 10));
-    self::assertSame(true, $hooks->add_filter('testFilter', 'time', 25));
-    self::assertSame(true, $hooks->add_action('testAction', 'time', 10));
-    self::assertSame(true, $hooks->add_action('testAction', 'print_r', 10));
-    self::assertSame(true, $hooks->add_action('testAction', 'time', 25));
+        self::assertSame(true, $hooks->addFilter('testFilter', 'time', 10));
+        self::assertSame(true, $hooks->addFilter('testFilter', 'print_r', 10));
+        self::assertSame(true, $hooks->addFilter('testFilter', 'time', 25));
+        self::assertSame(true, $hooks->addAction('testAction', 'time', 10));
+        self::assertSame(true, $hooks->addAction('testAction', 'print_r', 10));
+        self::assertSame(true, $hooks->addAction('testAction', 'time', 25));
 
-    self::assertTrue($hooks->remove_all_filters('testFilter', 10));
-    self::assertTrue($hooks->remove_all_actions('testAction', 10));
+        self::assertTrue($hooks->removeAllFilters('testFilter', 10));
+        self::assertTrue($hooks->removeAllActions('testAction', 10));
 
-    self::assertTrue($hooks->has_filter('testFilter'));
-    self::assertTrue($hooks->has_action('testAction'));
+        self::assertTrue($hooks->hasFilter('testFilter'));
+        self::assertTrue($hooks->hasAction('testAction'));
 
-    self::assertSame(25, $hooks->has_filter('testFilter', 'time'));
-    self::assertSame(25, $hooks->has_action('testAction', 'time'));
+        self::assertSame(25, $hooks->hasFilter('testFilter', 'time'));
+        self::assertSame(25, $hooks->hasAction('testAction', 'time'));
 
-    self::assertTrue($hooks->remove_all_filters('testFilter'));
-    self::assertTrue($hooks->remove_all_actions('testAction'));
+        self::assertTrue($hooks->removeAllFilters('testFilter'));
+        self::assertTrue($hooks->removeAllActions('testAction'));
 
-    self::assertFalse($hooks->has_filter('testFilter'));
-    self::assertFalse($hooks->has_action('testAction'));
-  }
+        self::assertFalse($hooks->hasFilter('testFilter'));
+        self::assertFalse($hooks->hasAction('testAction'));
+    }
 
-  public function testRunHookFunctions()
-  {
-    $hooks = Hooks::getInstance();
+    public function testRunHookFunctions()
+    {
+        $hooks = Hooks::getInstance();
 
-    self::assertSame(true, $hooks->remove_all_filters('testFilter'));
-    self::assertSame(true, $hooks->remove_all_actions('testAction'));
+        self::assertSame(true, $hooks->removeAllFilters('testFilter'));
+        self::assertSame(true, $hooks->removeAllActions('testAction'));
 
-    self::assertSame(false, $hooks->do_action('testAction'));
-    self::assertSame(false, $hooks->do_action_ref_array('testNotExistingAction', []));
-    self::assertSame('Foo', $hooks->apply_filters('testFilter', 'Foo'));
+        self::assertSame(false, $hooks->doAction('testAction'));
+        self::assertSame(false, $hooks->doActionRefArray('testNotExistingAction', []));
+        self::assertSame('Foo', $hooks->applyFilters('testFilter', 'Foo'));
 
-    self::assertSame(false, $hooks->do_action_ref_array('testAction', ['test']));
-    self::assertSame('Foo', $hooks->apply_filters_ref_array('testFilter', ['Foo']));
+        self::assertSame(false, $hooks->doActionRefArray('testAction', ['test']));
+        self::assertSame('Foo', $hooks->applyFiltersRefArray('testFilter', ['Foo']));
 
-    $mock = $this->createMock(ActionAndFilter::class);
-    $mock->expects(self::exactly(4))->method('doSomeAction');
-    $mock->expects(self::exactly(10))->method('applySomeFilter')->willReturn('foo');
+        $mock = $this->createMock(ActionAndFilter::class);
+        $mock->expects(self::exactly(4))->method('doSomeAction');
+        $mock->expects(self::exactly(10))->method('applySomeFilter')->willReturn('foo');
 
-    self::assertSame(true, $hooks->add_action('testAction', [$mock, 'doSomeAction']));
-    self::assertSame(true, $hooks->add_filter('testFilter', [$mock, 'applySomeFilter']));
+        self::assertSame(true, $hooks->addAction('testAction', [$mock, 'doSomeAction']));
+        self::assertSame(true, $hooks->addFilter('testFilter', [$mock, 'applySomeFilter']));
 
-    self::assertSame(2, $hooks->did_action('testAction'));
-    self::assertSame(true, $hooks->do_action('testAction'));
-    self::assertSame(3, $hooks->did_action('testAction'));
-    self::assertSame('foo', $hooks->apply_filters('testFilter', 'Foo'));
+        self::assertSame(2, $hooks->didAction('testAction'));
+        self::assertSame(true, $hooks->doAction('testAction'));
+        self::assertSame(3, $hooks->didAction('testAction'));
+        self::assertSame('foo', $hooks->applyFilters('testFilter', 'Foo'));
 
-    self::assertSame(true, $hooks->add_filter('all', [$mock, 'applySomeFilter']));
+        self::assertSame(true, $hooks->addFilter('all', [$mock, 'applySomeFilter']));
 
-    self::assertSame(false, $hooks->do_action('notExistingAction'));
-    self::assertSame('Foo', $hooks->apply_filters('notExistingFilter', 'Foo')); // unmodified value
+        self::assertSame(false, $hooks->doAction('notExistingAction'));
+        self::assertSame('Foo', $hooks->applyFilters('notExistingFilter', 'Foo')); // unmodified value
 
-    self::assertSame(true, $hooks->do_action('testAction', (object)['foo' => 'bar']));
-    self::assertSame(true, $hooks->do_action('testAction', 'param1', 'param2', 'param3', 'param4'));
-    self::assertSame(true, $hooks->do_action_ref_array('testAction', ['test']));
-    self::assertSame('foo', $hooks->apply_filters('testFilter', 'Foo'));
-    self::assertSame('foo', $hooks->apply_filters_ref_array('testFilter', ['Foo']));
-  }
+        self::assertSame(true, $hooks->doAction('testAction', (object)['foo' => 'bar']));
+        self::assertSame(true, $hooks->doAction('testAction', 'param1', 'param2', 'param3', 'param4'));
+        self::assertSame(true, $hooks->doActionRefArray('testAction', ['test']));
+        self::assertSame('foo', $hooks->applyFilters('testFilter', 'Foo'));
+        self::assertSame('foo', $hooks->applyFiltersRefArray('testFilter', ['Foo']));
+    }
 
-  public function testRunShortcodeFunctions()
-  {
-    require_once __DIR__ . '/HooksFooBar.php';
+    public function testRunShortcodeFunctions()
+    {
+        require_once __DIR__ . '/HooksFooBar.php';
 
-    $hooks = Hooks::getInstance();
+        $hooks = Hooks::getInstance();
 
-    self::assertSame(true, $hooks->remove_all_shortcodes());
+        self::assertSame(true, $hooks->removeAllShortcodes());
 
-    self::assertSame('testAction', $hooks->do_shortcode('testAction'));
+        self::assertSame('testAction', $hooks->doShortcode('testAction'));
 
-    $testClass = new HooksFooBar('foo');
-    self::assertSame(true, $hooks->add_shortcode('testAction', [$testClass, 'doSomethingFunction']));
-    self::assertTrue($hooks->shortcode_exists('testAction'));
+        $testClass = new HooksFooBar('foo');
+        self::assertSame(true, $hooks->addShortcode('testAction', [$testClass, 'doSomethingFunction']));
+        self::assertTrue($hooks->shortcodeExists('testAction'));
 
-    self::assertSame('foo bar <li class="">content</li>', $hooks->do_shortcode('foo bar [testAction foo="bar"]content[/testAction]'));
+        self::assertSame(
+            'foo bar <li class="">content</li>',
+            $hooks->doShortcode('foo bar [testAction foo="bar"]content[/testAction]'),
+        );
 
-    self::assertSame('foo bar ', $hooks->strip_shortcodes('foo bar [testAction foo="bar"]content[/testAction]'));
+        self::assertSame('foo bar ', $hooks->stripShortcodes('foo bar [testAction foo="bar"]content[/testAction]'));
 
-    self::assertSame(true, $hooks->remove_shortcode('testAction'));
-    self::assertSame(false, $hooks->shortcode_exists('testAction'));
-  }
+        self::assertSame(true, $hooks->removeShortcode('testAction'));
+        self::assertSame(false, $hooks->shortcodeExists('testAction'));
+    }
 
   /**
    * Sets up the fixture, for example, opens a network connection.
    * This method is called before a test is executed.
    */
-  protected function setUp(): void
-  {
-    $this->hooks = Hooks::getInstance();
-  }
-
+    protected function setUp(): void
+    {
+        $this->hooks = Hooks::getInstance();
+    }
 }

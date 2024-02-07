@@ -4,7 +4,11 @@ namespace tests\stubs;
 
 class ActionAndFilter
 {
-    public function doSomeAction() {}
+    public function doSomeAction()
+    {
+    }
 
-    public function applySomeFilter() {}
+    public function applySomeFilter()
+    {
+    }
 }

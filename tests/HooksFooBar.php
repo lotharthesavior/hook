@@ -2,12 +2,14 @@
 
 namespace tests;
 
+use Hook\Hooks;
+
 /**
  * Class HooksFooBar
  */
 class HooksFooBar extends \PHPUnit\Framework\TestCase
 {
-  protected $foo = '';
+    protected $foo = '';
 
   /**
    * @param        $attrs
@@ -15,21 +17,21 @@ class HooksFooBar extends \PHPUnit\Framework\TestCase
    *
    * @return string
    */
-  public function doSomethingFunction($attrs, $content = '')
-  {
-    // init
-    $foo = '';
+    public function doSomethingFunction($attrs, $content = '')
+    {
+      // init
+        $foo = '';
 
-    extract(
-        \voku\helper\Hooks::getInstance()->shortcode_atts(
-            [
+        extract(
+            Hooks::getInstance()->shortcodeAttrs(
+                [
                 'foo',
-            ],
-            $attrs
-        ),
-        EXTR_OVERWRITE
-    );
+                ],
+                $attrs
+            ),
+            EXTR_OVERWRITE
+        );
 
-    return $this->foo . '<li class="' . $foo . '">' . $content . '</li>';
-  }
+        return $this->foo . '<li class="' . $foo . '">' . $content . '</li>';
+    }
 }
