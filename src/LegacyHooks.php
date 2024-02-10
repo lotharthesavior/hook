@@ -12,7 +12,7 @@ namespace Hook;
  *
  * @package voku\helper
  */
-class Hooks
+class LegacyHooks
 {
     /**
      * Filters - holds list of hooks

@@ -1,0 +1,261 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Hook\\\\Action\\:\\:doActionRefArray\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Action.php
+
+		-
+			message: "#^Property Hook\\\\Action\\:\\:\\$actions type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Action.php
+
+		-
+			message: "#^Method Hook\\\\Filter\\:\\:applyFiltersRefArray\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Filter.php
+
+		-
+			message: "#^Method Hook\\\\Filter\\:\\:callAllHook\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Filter.php
+
+		-
+			message: "#^Method Hook\\\\Filter\\:\\:executeSortedFilters\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Filter.php
+
+		-
+			message: "#^Property Hook\\\\Filter\\:\\:\\$currentFilter type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Filter.php
+
+		-
+			message: "#^Property Hook\\\\Filter\\:\\:\\$filters type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Filter.php
+
+		-
+			message: "#^Property Hook\\\\Filter\\:\\:\\$mergedFilters type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Filter.php
+
+		-
+			message: "#^Method Hook\\\\Hooks\\:\\:applyFiltersRefArray\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Method Hook\\\\Hooks\\:\\:callAllHook\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Method Hook\\\\Hooks\\:\\:doActionRefArray\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Method Hook\\\\Hooks\\:\\:doShortcodeTag\\(\\) has parameter \\$m with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Method Hook\\\\Hooks\\:\\:doShortcodeTag\\(\\) never returns false so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Method Hook\\\\Hooks\\:\\:executeSortedFilters\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Method Hook\\\\Hooks\\:\\:shortcodeAttrs\\(\\) has parameter \\$attrs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Method Hook\\\\Hooks\\:\\:shortcodeAttrs\\(\\) has parameter \\$pairs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Method Hook\\\\Hooks\\:\\:shortcodeAttrs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Method Hook\\\\Hooks\\:\\:shortcodeParseAttrs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Method Hook\\\\Hooks\\:\\:stripShortcodeTag\\(\\) has parameter \\$m with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Property Hook\\\\Hooks\\:\\:\\$actions type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Property Hook\\\\Hooks\\:\\:\\$currentFilter type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Property Hook\\\\Hooks\\:\\:\\$filters type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Property Hook\\\\Hooks\\:\\:\\$mergedFilters type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Property Hook\\\\Hooks\\:\\:\\$shortcodeTags type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: src/Hooks.php
+
+		-
+			message: "#^Method Hook\\\\LegacyHooks\\:\\:applyFiltersRefArray\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Method Hook\\\\LegacyHooks\\:\\:callAllHook\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Method Hook\\\\LegacyHooks\\:\\:doActionRefArray\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Method Hook\\\\LegacyHooks\\:\\:doShortcodeTag\\(\\) has parameter \\$m with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Method Hook\\\\LegacyHooks\\:\\:doShortcodeTag\\(\\) never returns false so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Method Hook\\\\LegacyHooks\\:\\:executeSortedFilters\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Method Hook\\\\LegacyHooks\\:\\:shortcodeAttrs\\(\\) has parameter \\$attrs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Method Hook\\\\LegacyHooks\\:\\:shortcodeAttrs\\(\\) has parameter \\$pairs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Method Hook\\\\LegacyHooks\\:\\:shortcodeAttrs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Method Hook\\\\LegacyHooks\\:\\:shortcodeParseAttrs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Method Hook\\\\LegacyHooks\\:\\:stripShortcodeTag\\(\\) has parameter \\$m with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^PHPDoc tag @return with type Hook\\\\Hooks is incompatible with native type Hook\\\\LegacyHooks\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Property Hook\\\\LegacyHooks\\:\\:\\$actions type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Property Hook\\\\LegacyHooks\\:\\:\\$currentFilter type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Property Hook\\\\LegacyHooks\\:\\:\\$filters type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Property Hook\\\\LegacyHooks\\:\\:\\$mergedFilters type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Property Hook\\\\LegacyHooks\\:\\:\\$shortcodeTags type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: src/LegacyHooks.php
+
+		-
+			message: "#^Method Hook\\\\Shortcode\\:\\:doShortcodeTag\\(\\) has parameter \\$m with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Shortcode.php
+
+		-
+			message: "#^Method Hook\\\\Shortcode\\:\\:doShortcodeTag\\(\\) never returns false so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/Shortcode.php
+
+		-
+			message: "#^Method Hook\\\\Shortcode\\:\\:shortcodeAttrs\\(\\) has parameter \\$attrs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Shortcode.php
+
+		-
+			message: "#^Method Hook\\\\Shortcode\\:\\:shortcodeAttrs\\(\\) has parameter \\$pairs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Shortcode.php
+
+		-
+			message: "#^Method Hook\\\\Shortcode\\:\\:shortcodeAttrs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Shortcode.php
+
+		-
+			message: "#^Method Hook\\\\Shortcode\\:\\:shortcodeParseAttrs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Shortcode.php
+
+		-
+			message: "#^Method Hook\\\\Shortcode\\:\\:stripShortcodeTag\\(\\) has parameter \\$m with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Shortcode.php
+
+		-
+			message: "#^Property Hook\\\\Shortcode\\:\\:\\$shortcodeTags type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Shortcode.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: src/Shortcode.php

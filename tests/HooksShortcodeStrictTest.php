@@ -4,29 +4,22 @@ declare(strict_types=1);
 
 namespace tests;
 
+use Hook\Shortcode;
 use PHPUnit\Framework\TestCase;
-use Hook\Hooks;
 
 /**
  * Class HooksTest
  */
 class HooksShortcodeStrictTest extends TestCase
 {
-  /**
-   * @var Hooks
-   */
-    protected $hooks;
-
-  /**
-   * @param $attrs
-   *
-   * @return string
-   */
-    public function parseYoutube($attrs)
+    /**
+     * @param array $attrs
+     *
+     * @return string
+     */
+    public function parseYoutube(array $attrs): string
     {
-        $hooks = Hooks::getInstance();
-
-      // init
+        // init
         $autoplay = '';
         $noControls = '';
         $list = '';
@@ -38,17 +31,17 @@ class HooksShortcodeStrictTest extends TestCase
         $start = '';
 
         extract(
-            $hooks->shortcodeAttrs(
+            Shortcode::shortcodeAttrs(
                 [
-                'autoplay',
-                'noControls',
-                'list'   => null,
-                'id'     => null,
-                'width'  => 640,
-                'height' => 390,
-                'color'  => 'red',
-                'theme'  => 'dark',
-                'start'  => 0,
+                    'autoplay',
+                    'noControls',
+                    'list' => null,
+                    'id' => null,
+                    'width' => 640,
+                    'height' => 390,
+                    'color' => 'red',
+                    'theme' => 'dark',
+                    'start' => 0,
                 ],
                 $attrs
             ),
@@ -70,8 +63,8 @@ class HooksShortcodeStrictTest extends TestCase
         }
         $h .= '?color=' . $color
             . '&theme=' . $theme
-            . '&autoplay=' . (int) $autoplay
-            . '&controls=' . (int) !$noControls;
+            . '&autoplay=' . (int)$autoplay
+            . '&controls=' . (int)!$noControls;
         if ($list) {
             $h .= '&listType=playlist&list=' . $list;
         } else {
@@ -84,11 +77,10 @@ class HooksShortcodeStrictTest extends TestCase
 
     public function testShortcode()
     {
-        $hooks = Hooks::getInstance();
-        $hooks->addShortcode('youtube', [$this, 'parseYoutube']);
+        Shortcode::addShortcode('youtube', [$this, 'parseYoutube']);
 
         $default_content = '[youtube id=iCUV3iv9xOs color=white theme=light]';
-        $parsed_content = $hooks->doShortcode($default_content);
+        $parsed_content = Shortcode::doShortcode($default_content);
 
         self::assertSame(
             '<iframe'
@@ -100,14 +92,5 @@ class HooksShortcodeStrictTest extends TestCase
             . ' />',
             $parsed_content,
         );
-    }
-
-  /**
-   * Sets up the fixture, for example, opens a network connection.
-   * This method is called before a test is executed.
-   */
-    protected function setUp(): void
-    {
-        $this->hooks = Hooks::getInstance();
     }
 }

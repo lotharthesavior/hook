@@ -2,28 +2,21 @@
 
 namespace tests;
 
-use Hook\Hooks;
+use Hook\Shortcode;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class HooksTest
  */
-class HooksShortcodeTest extends \PHPUnit\Framework\TestCase
+class HooksShortcodeTest extends TestCase
 {
-  /**
-   * @var Hooks
-   */
-    protected $hooks;
-
-  /**
-   * @param array $attrs
-   *
-   * @return string
-   */
+    /**
+     * @param array $attrs
+     *
+     * @return string
+     */
     public function parseYoutube(array $attrs): string
     {
-        $hooks = Hooks::getInstance();
-
-      // init
         $autoplay = '';
         $noControls = '';
         $list = '';
@@ -35,17 +28,17 @@ class HooksShortcodeTest extends \PHPUnit\Framework\TestCase
         $start = '';
 
         extract(
-            $hooks->shortcodeAttrs(
+            Shortcode::shortcodeAttrs(
                 [
-                'autoplay',
-                'noControls',
-                'list'   => null,
-                'id'     => null,
-                'width'  => 640,
-                'height' => 390,
-                'color'  => 'red',
-                'theme'  => 'dark',
-                'start'  => 0,
+                    'autoplay',
+                    'noControls',
+                    'list' => null,
+                    'id' => null,
+                    'width' => 640,
+                    'height' => 390,
+                    'color' => 'red',
+                    'theme' => 'dark',
+                    'start' => 0,
                 ],
                 $attrs
             ),
@@ -79,11 +72,10 @@ class HooksShortcodeTest extends \PHPUnit\Framework\TestCase
 
     public function testShortcode()
     {
-        $hooks = Hooks::getInstance();
-        $hooks->addShortcode('youtube', [$this, 'parseYoutube']);
+        Shortcode::addShortcode('youtube', [$this, 'parseYoutube']);
 
         $default_content = '[youtube id=iCUV3iv9xOs color=white theme=light]';
-        $parsed_content = $hooks->doShortcode($default_content);
+        $parsed_content = Shortcode::doShortcode($default_content);
 
         self::assertSame(
             '<iframe'
@@ -95,14 +87,5 @@ class HooksShortcodeTest extends \PHPUnit\Framework\TestCase
             . ' />',
             $parsed_content,
         );
-    }
-
-  /**
-   * Sets up the fixture, for example, opens a network connection.
-   * This method is called before a test is executed.
-   */
-    protected function setUp(): void
-    {
-        $this->hooks = Hooks::getInstance();
     }
 }

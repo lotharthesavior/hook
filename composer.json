@@ -1,6 +1,6 @@
 {
-  "name": "voku/php-hooks",
-  "description": "A fork of the WordPress filters hook system rolled in to a class to be ported into any PHP-based system",
+  "name": "lotharthesavior/hook",
+  "description": "The Hook System for PHP Apps",
   "keywords": [
     "hook-system",
     "filters-system",
@@ -9,33 +9,28 @@
     "filters"
   ],
   "type": "library",
-  "homepage": "http://github.com/voku/php-hooks/",
+  "homepage": "http://github.com/lotharthesavior/hook/",
   "license": "GPL-3.0",
-  "authors": [
-    {
-      "name": "Ohad Raz",
-      "homepage": "https://github.com/bainternet",
-      "role": "Developer"
-    },
-    {
-      "name": "Lars Moelleken",
-      "homepage": "http://www.moelleken.org/",
-      "role": "Developer"
-    }
-  ],
   "support": {
-    "issues": "https://github.com/voku/php-hooks/issues"
+    "issues": "https://github.com/lotharthesavior/hook/issues"
   },
   "require": {
-    "php": "^8.0|^8.1|^8.2"
+    "php": "^8.0|^8.1|^8.2",
+    "phpro/grumphp": "^2.4"
   },
   "require-dev": {
-    "phpunit/phpunit": "^11.0"
+    "phpunit/phpunit": "^11.0",
+    "phpstan/phpstan": "^1.10"
   },
   "autoload": {
     "psr-4": {
-      "voku\\helper\\": "src/voku/helper/",
+      "Hook\\": "src/",
       "tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "phpro/grumphp": true
     }
   }
 }

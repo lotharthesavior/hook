@@ -2,28 +2,29 @@
 
 namespace tests;
 
-use Hook\Hooks;
+use Hook\Shortcode;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class HooksFooBar
  */
-class HooksFooBar extends \PHPUnit\Framework\TestCase
+class HooksFooBar extends TestCase
 {
     protected $foo = '';
 
-  /**
-   * @param        $attrs
-   * @param string $content
-   *
-   * @return string
-   */
-    public function doSomethingFunction($attrs, $content = '')
+    /**
+     * @param        $attrs
+     * @param string $content
+     *
+     * @return string
+     */
+    public function doSomethingFunction($attrs, string $content = ''): string
     {
       // init
         $foo = '';
 
         extract(
-            Hooks::getInstance()->shortcodeAttrs(
+            Shortcode::shortcodeAttrs(
                 [
                 'foo',
                 ],

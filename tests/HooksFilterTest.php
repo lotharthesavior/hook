@@ -2,40 +2,23 @@
 
 namespace tests;
 
-use voku\helper\Hooks;
+use Hook\Filter;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class HooksTest
  */
-class HooksFilterTest extends \PHPUnit\Framework\TestCase
+class HooksFilterTest extends TestCase
 {
+    public function testFilter(): void
+    {
+        Filter::addFilter(
+            'foo',
+            function ($content) {
+                return '<b>' . $content . '</b>';
+            }
+        );
 
-  /**
-   * @var Hooks
-   */
-  protected $hooks;
-
-  /**
-   * test filter
-   */
-  public function testFilter()
-  {
-    $this->hooks->add_filter(
-        'foo', function ($content) {
-      return '<b>' . $content . '</b>';
+        self::assertSame('<b>Hello world</b>', Filter::applyFilters('foo', 'Hello world'));
     }
-    );
-
-    self::assertSame('<b>Hello world</b>', $this->hooks->apply_filters('foo', 'Hello world'));
-  }
-
-  /**
-   * Sets up the fixture, for example, opens a network connection.
-   * This method is called before a test is executed.
-   */
-  protected function setUp(): void
-  {
-    $this->hooks = Hooks::getInstance();
-  }
-
 }

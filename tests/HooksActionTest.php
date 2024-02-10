@@ -2,18 +2,14 @@
 
 namespace tests;
 
-use Hook\Hooks;
+use Hook\Action;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class HooksTest
  */
-class HooksActionTest extends \PHPUnit\Framework\TestCase
+class HooksActionTest extends TestCase
 {
-  /**
-   * @var Hooks
-   */
-    protected $hooks;
-
   /**
    * test action
    */
@@ -21,24 +17,15 @@ class HooksActionTest extends \PHPUnit\Framework\TestCase
     {
         $done = false;
 
-        $this->hooks->addAction(
+        Action::addAction(
             'bar',
             function () use (&$done) {
                 $done = true;
             }
         );
 
-        $this->hooks->doAction('bar');
+        Action::doAction('bar');
 
         self::assertTrue($done);
-    }
-
-  /**
-   * Sets up the fixture, for example, opens a network connection.
-   * This method is called before a test is executed.
-   */
-    protected function setUp(): void
-    {
-        $this->hooks = Hooks::getInstance();
     }
 }
